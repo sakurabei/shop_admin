@@ -8,18 +8,22 @@ el-form-item表单元素组件
   - label：标签名称组件
   - prop="name" 校验/重置用的
   -->
-  <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
-    <el-form-item label="用户名" prop="username">
-      <el-input v-model="ruleForm.username"></el-input>
-    </el-form-item>
-    <el-form-item label="密码" prop="password">
-      <el-input v-model="ruleForm.password"></el-input>
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="startLogin()">登陆</el-button>
-      <el-button @click="resetForm()">重置</el-button>
-    </el-form-item>
-  </el-form>
+  <el-row type="flex" justify="center" align="middle">
+    <el-col :span="8">
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+        <el-form-item label="用户名" prop="username">
+          <el-input v-model="ruleForm.username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码" prop="password">
+          <el-input v-model="ruleForm.password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="startLogin()">登陆</el-button>
+          <el-button @click="resetForm()">重置</el-button>
+        </el-form-item>
+      </el-form>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -67,4 +71,23 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+html,
+body,
+#app {
+  height: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+.el-row {
+  height: 100%;
+  background: #2d434c;
+}
+.el-col {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px 30px;
+}
+</style>
