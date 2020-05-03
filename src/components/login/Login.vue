@@ -93,16 +93,8 @@ export default {
 };
 </script>
 
-<style>
-html,
-body,
-#app {
-  height: 100%;
-}
-* {
-  margin: 0;
-  padding: 0;
-}
+<style scoped>
+
 .el-row {
   height: 100%;
   background: #2d434c;
