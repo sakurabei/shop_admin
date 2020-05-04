@@ -68,6 +68,8 @@ export default {
           .then(res => {
             console.log(res);
             if (res.data.meta.status === 200) {
+              //把token保存到本地
+              localStorage.setItem("token", res.data.data.token);
               this.$message({
                 // 成功提示
                 message: "恭喜你，登陆成功",
@@ -94,7 +96,6 @@ export default {
 </script>
 
 <style scoped>
-
 .el-row {
   height: 100%;
   background: #2d434c;

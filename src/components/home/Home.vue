@@ -10,7 +10,7 @@
         </el-col>
         <el-col :span="8" class="col_r">
           恭喜上海前端37期年薪40万
-          <a href="#">退出</a>
+          <a @click.prevent="logout" href="#">退出</a>
         </el-col>
       </el-row>
     </el-header>
@@ -23,7 +23,40 @@
 
 <script>
 /* eslint-disable */
-export default {};
+export default {
+  methods:{
+    //退出
+    logout(){
+      //确认框
+       this.$confirm('此操作将退出该账户, 是否继续?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        })
+        //点击确定的时候=>走then
+        .then(() => {
+          //清除token
+          localStorage.removeItem('token')
+          //提示
+          this.$message({
+            type: 'success',
+            message: '退出成功!',
+            duration:800
+          });
+          //跳转到login页
+          this.$router.push('/login')
+        })
+        //点击取消的时候 =>catch
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消退出',
+            duration:800
+          });          
+        });
+    }
+  }
+};
 </script>
 
 <style scoped>

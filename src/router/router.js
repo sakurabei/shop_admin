@@ -1,18 +1,27 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Login from '../components/login/Login.vue'
-import Home from '../components/home/Home.vue'
 /* eslint-disable */
+import Vue from "vue"
+import VueRouter from "vue-router"
+import Login from "../components/login/Login.vue"
+import Home from "../components/home/Home.vue"
+
 // 在模块化工程中Vue.use()
 Vue.use(VueRouter)
 
 // 实例化
 const router = new VueRouter({
   routes: [
-    {path: '/',redirect: '/login'},
-    { path: '/login', name: 'login', component: Login },
-    {path: '/home', name: 'home', component: Home}
+    { path: "/", redirect: "/login" },
+    { path: "/login", name: "login", component: Login },
+    { path: "/home", name: "home", component: Home }
   ]
-})
+});
+router.beforeEach((to, from, next) => {
+  if (to.path === "/login") {
+    next()
+  } else { 
+    const token = localStorage.getItem("token");
+    token ? next() : next("/login")
+  }
+});
 // 导出
-export default router
+export default router;
