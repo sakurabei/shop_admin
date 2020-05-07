@@ -6,7 +6,7 @@
       <el-col :span="8">
         <el-input placeholder="请输入内容" v-model="queryText">
           <!-- slot="append(后面) prepend(前面)"决定按钮的位置 -->
-          <el-button slot="append" icon="el-icon-search"></el-button>
+          <el-button @click="startQuery" slot="append" icon="el-icon-search"></el-button>
         </el-input>
       </el-col>
       <el-col :span="8">
@@ -60,11 +60,11 @@ export default {
     this.loadUsersData();
   },
   methods: {
-    loadUsersData(pagenum = 1) {
+    loadUsersData(pagenum = 1, query = "") {
       axios
         .get("http://localhost:8888/api/private/v1/users", {
           params: {
-            query: "",
+            query,
             pagenum,
             pagesize: 2
           },
@@ -86,7 +86,11 @@ export default {
     clickCurrentPage(curPage) {
       console.log(curPage);
       // 传递参数 加载当前页的内容
-      this.loadUsersData(curPage);
+      this.loadUsersData(curPage, this.queryText);
+    },
+    startQuery() {
+      console.log(this.queryText);
+      this.loadUsersData(1, this.queryText);
     }
   }
 };
