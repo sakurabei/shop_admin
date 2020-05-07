@@ -1,6 +1,27 @@
 
 <template>
   <div>
+    <!-- 输入框部分 -->
+    <el-row :gutter="20">
+      <el-col :span="8">
+        <el-input placeholder="请输入内容" v-model="queryText">
+          <!-- slot="append(后面) prepend(前面)"决定按钮的位置 -->
+          <el-button slot="append" icon="el-icon-search"></el-button>
+        </el-input>
+      </el-col>
+      <el-col :span="8">
+        <el-button>添加用户</el-button>
+      </el-col>
+    </el-row>
+    <!-- 表格部分 -->
+    <!-- el-table：表格组件
+      -：data="tableData"
+      表格数据
+      el-table-column：列
+      行数=>数据中心的数组元素个数决定的
+      label：标签名称
+      prop：读取数据
+    -->
     <el-table :data="usersData" style="width: 100%">
       <el-table-column prop="username" label="姓名" width="180"></el-table-column>
       <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
@@ -30,7 +51,8 @@ export default {
       // 总个数
       total: 0,
       // 当前页
-      pagenum: 1
+      pagenum: 1,
+      queryText: ""
     };
   },
   created() {
@@ -63,7 +85,7 @@ export default {
     // 点击页码
     clickCurrentPage(curPage) {
       console.log(curPage);
-      // 传递参数 加载click页的内容
+      // 传递参数 加载当前页的内容
       this.loadUsersData(curPage);
     }
   }
