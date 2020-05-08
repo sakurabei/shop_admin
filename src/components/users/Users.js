@@ -9,7 +9,8 @@ export default {
       total: 0,
       // 当前页
       pagenum: 1,
-      queryText: ""
+      queryText: "",
+      state: true
     };
   },
   created() {
