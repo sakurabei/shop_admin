@@ -1,12 +1,22 @@
-
 <template>
   <div>
+    <!-- 面包屑 -->
+    <el-breadcrumb separator-class="el-icon-arrow-right" class="head">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+      <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+    </el-breadcrumb>
+
     <!-- 输入框部分 -->
     <el-row :gutter="20">
       <el-col :span="8">
         <el-input placeholder="请输入内容" v-model="queryText">
           <!-- slot="append(后面) prepend(前面)"决定按钮的位置 -->
-          <el-button @click="startQuery" slot="append" icon="el-icon-search"></el-button>
+          <el-button
+            @click="startQuery"
+            slot="append"
+            icon="el-icon-search"
+          ></el-button>
         </el-input>
       </el-col>
       <el-col :span="8">
@@ -23,7 +33,11 @@
       prop：读取数据
     -->
     <el-table :data="usersData" style="width: 100%">
-      <el-table-column prop="username" label="姓名" width="180"></el-table-column>
+      <el-table-column
+        prop="username"
+        label="姓名"
+        width="180"
+      ></el-table-column>
       <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
       <el-table-column prop="mobile" label="电话"></el-table-column>
       <el-table-column label="用户状态"></el-table-column>
@@ -97,4 +111,10 @@ export default {
 </script>
 
 <style>
+.head {
+  height: 40px;
+  line-height: 40px;
+  padding-left: 20px;
+  background: #d4dae0;
+}
 </style>
