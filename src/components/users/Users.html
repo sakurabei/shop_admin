@@ -1,0 +1,49 @@
+<div>
+  <!-- 面包屑 -->
+  <el-breadcrumb separator-class="el-icon-arrow-right" class="head">
+    <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+    <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+    <el-breadcrumb-item>用户列表</el-breadcrumb-item>
+  </el-breadcrumb>
+
+  <!-- 输入框部分 -->
+  <el-row :gutter="20">
+    <el-col :span="8">
+      <el-input placeholder="请输入内容" v-model="queryText">
+        <!-- slot="append(后面) prepend(前面)"决定按钮的位置 -->
+        <el-button
+          @click="startQuery"
+          slot="append"
+          icon="el-icon-search"
+        ></el-button>
+      </el-input>
+    </el-col>
+    <el-col :span="8">
+      <el-button>添加用户</el-button>
+    </el-col>
+  </el-row>
+  <!-- 表格部分 -->
+  <!-- el-table：表格组件
+    -：data="tableData"
+    表格数据
+    el-table-column：列
+    行数=>数据中心的数组元素个数决定的
+    label：标签名称
+    prop：读取数据
+  -->
+  <el-table :data="usersData" style="width: 100%">
+    <el-table-column prop="username" label="姓名" width="180"></el-table-column>
+    <el-table-column prop="email" label="邮箱" width="180"></el-table-column>
+    <el-table-column prop="mobile" label="电话"></el-table-column>
+    <el-table-column label="用户状态"></el-table-column>
+    <el-table-column label="操作"></el-table-column>
+  </el-table>
+  <el-pagination
+    @current-change="clickCurrentPage"
+    background
+    layout="prev, pager, next"
+    :total="total"
+    :page-size="2"
+    :current-page="pagenum"
+  ></el-pagination>
+</div>

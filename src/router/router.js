@@ -1,6 +1,7 @@
 /* eslint-disable */
 import Vue from "vue"
 import VueRouter from "vue-router"
+
 import Login from "../components/login/Login.vue"
 import Home from "../components/home/Home.vue"
 import Users from "../components/users/Users.vue"
