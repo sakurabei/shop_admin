@@ -67,34 +67,53 @@
 export default {
   methods: {
     //退出
-    logout() {
+    async logout() {
       //确认框
-      this.$confirm("此操作将退出该账户, 是否继续?", "提示", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        type: "warning"
-      })
-        //点击确定的时候=>走then
-        .then(() => {
-          //清除token
-          localStorage.removeItem("token");
-          //提示
-          this.$message({
-            type: "success",
-            message: "退出成功!",
-            duration: 800
-          });
-          //跳转到login页
-          this.$router.push("/login");
-        })
-        //点击取消的时候 =>catch
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "取消退出",
-            duration: 800
-          });
+      try {
+        const p = await this.$confirm("此操作将退出该账户, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
         });
+        //清除token
+        localStorage.removeItem("token");
+        //提示
+        this.$message({
+          type: "success",
+          message: "退出成功!",
+          duration: 800
+        });
+        //跳转到login页
+        this.$router.push("/login");
+      } catch (error) {
+        this.$message({
+          type: "info",
+          message: "取消退出",
+          duration: 800
+        });
+      }
+
+      // //点击确定的时候=>走then
+      // .then(() => {
+      //   //清除token
+      //   localStorage.removeItem("token");
+      //   //提示
+      //   this.$message({
+      //     type: "success",
+      //     message: "退出成功!",
+      //     duration: 800
+      //   });
+      //   //跳转到login页
+      //   this.$router.push("/login");
+      // })
+      // //点击取消的时候 =>catch
+      // .catch(() => {
+      //   this.$message({
+      //     type: "info",
+      //     message: "取消退出",
+      //     duration: 800
+      //   });
+      // });
     }
   }
 };
