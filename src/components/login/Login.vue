@@ -58,34 +58,57 @@ export default {
     // 开始登陆
     startLogin() {
       // 校验
-      this.$refs.ruleForm.validate(valid => {
+      this.$refs.ruleForm.validate(async valid => {
         if (!valid) {
           return alert("格式不正确");
         }
         // console.log("开始登陆");
-        axios
-          .post("http://localhost:8888/api/private/v1/login", this.ruleForm)
-          .then(res => {
-            console.log(res);
-            if (res.data.meta.status === 200) {
-              //把token保存到本地
-              localStorage.setItem("token", res.data.data.token);
-              this.$message({
-                // 成功提示
-                message: "恭喜你，登陆成功",
-                type: "success",
-                duration: 800
-              });
-              // 直接跳转到home页面
-              this.$router.push("/home");
-            } else {
-              this.$message({
-                message: res.data.meta.msg,
-                type: "error",
-                duration: 800
-              });
-            }
+        let res = await axios.post(
+          "http://localhost:8888/api/private/v1/login",
+          this.ruleForm
+        );
+        console.log(res);
+        if (res.data.meta.status === 200) {
+          //把token保存到本地
+          localStorage.setItem("token", res.data.data.token);
+          this.$message({
+            // 成功提示
+            message: "恭喜你，登陆成功",
+            type: "success",
+            duration: 800
           });
+          // 直接跳转到home页面
+          this.$router.push("/home");
+        } else {
+          this.$message({
+            message: res.data.meta.msg,
+            type: "error",
+            duration: 800
+          });
+        }
+        //  axios
+        //     .post("http://localhost:8888/api/private/v1/login", this.ruleForm)
+        //     .then(res => {
+        //       console.log(res);
+        //       if (res.data.meta.status === 200) {
+        //         //把token保存到本地
+        //         localStorage.setItem("token", res.data.data.token);
+        //         this.$message({
+        //           // 成功提示
+        //           message: "恭喜你，登陆成功",
+        //           type: "success",
+        //           duration: 800
+        //         });
+        //         // 直接跳转到home页面
+        //         this.$router.push("/home");
+        //       } else {
+        //         this.$message({
+        //           message: res.data.meta.msg,
+        //           type: "error",
+        //           duration: 800
+        //         });
+        //       }
+        //     });
       });
     },
     resetForm() {

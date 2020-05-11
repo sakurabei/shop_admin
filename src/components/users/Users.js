@@ -18,27 +18,47 @@ export default {
     this.loadUsersData();
   },
   methods: {
-    loadUsersData(pagenum = 1, query = "") {
-      axios
-        .get("http://localhost:8888/api/private/v1/users", {
-          params: {
-            query,
-            pagenum,
-            pagesize: 2
-          },
-          headers: {
-            Authorization: localStorage.getItem("token")
-          }
-        })
-        .then(res => {
-          console.log(res);
-          // 保存列表数据
-          this.usersData = res.data.data.users;
-          // 保存 用户总个数
-          this.total = res.data.data.total;
-          // 保存当前页码
-          this.pagenum = res.data.data.pagenum;
-        });
+    async loadUsersData(pagenum = 1, query = "") {
+      const url = "http://localhost:8888/api/private/v1/users";
+      const config = {
+        params: {
+          query,
+          pagenum,
+          pagesize: 2
+        },
+        headers: {
+          Authorization: localStorage.getItem("token")
+        }
+      };
+      let res = await axios.get(url, config);
+
+      console.log(res);
+      // 保存列表数据
+      this.usersData = res.data.data.users;
+      // 保存 用户总个数
+      this.total = res.data.data.total;
+      // 保存当前页码
+      this.pagenum = res.data.data.pagenum;
+      // axios
+      //   .get('http://localhost:8888/api/private/v1/users', {
+      //     params: {
+      //       query,
+      //       pagenum,
+      //       pagesize: 2
+      //     },
+      //     headers: {
+      //       Authorization: localStorage.getItem('token')
+      //     }
+      //   })
+      //   .then(res => {
+      //     console.log(res)
+      // // 保存列表数据
+      // this.usersData = res.data.data.users
+      // // 保存 用户总个数
+      // this.total = res.data.data.total
+      // // 保存当前页码
+      // this.pagenum = res.data.data.pagenum
+      //   })
     },
     // 点击页码
     clickCurrentPage(curPage) {
