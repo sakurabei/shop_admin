@@ -166,6 +166,44 @@ export default {
     //监听对话框关闭
     dialogClosed() {
       this.$refs.addUserForm.resetFields();
+    },
+    // 删除用户
+    async delUser(id) {
+      try {
+        await this.$confirm("此操作将永久删除该用户, 是否继续?", "提示", {
+          confirmButtonText: "确定",
+          cancelButtonText: "取消",
+          type: "warning"
+        });
+        // 发送请求删除用户
+        // axios.delete(url,config)
+        //     params: {
+        let res = await axios.delete(
+          `http://localhost:8888/api/private/v1/users/${id}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem("token")
+            }
+          }
+        );
+        if (res.data.meta.status === 200) {
+          // 1.刷新页面
+          this.loadUsersData();
+          // 2.提示
+          this.$message({
+            type: "success",
+            message: "删除成功",
+            duration: 800
+          });
+        }
+        // console.log(res);
+      } catch (error) {
+        this.$message({
+          type: "info",
+          message: "取消删除",
+          duration: 800
+        });
+      }
     }
   }
 };
