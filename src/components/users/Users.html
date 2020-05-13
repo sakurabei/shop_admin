@@ -73,18 +73,24 @@
     :page-size="2"
     :current-page="pagenum"
   ></el-pagination>
+  <!-- 第一个对话框 -添加用户对话框 -->
+  <!-- el-dialog对话框
+  表格=>数据=>数组
+  表单=>数据=>对象
+  -->
   <el-dialog title="添加用户" :visible.sync=" dialogAddUserFormVisible">
-    <el-form :model="addUserForm" label-width="80px">
-      <el-form-item label="用户名">
+    <!-- 表单 -->
+    <el-form :rules="rules" :model="addUserForm" label-width="80px">
+      <el-form-item label="用户名" prop="username">
         <el-input v-model="addUserForm.username"></el-input>
       </el-form-item>
-      <el-form-item label="密码">
+      <el-form-item label="密码" prop="password">
         <el-input v-model="addUserForm.password"></el-input>
       </el-form-item>
-      <el-form-item label="邮箱">
+      <el-form-item label="邮箱" prop="email">
         <el-input v-model="addUserForm.email"></el-input>
       </el-form-item>
-      <el-form-item label="手机">
+      <el-form-item label="手机" prop="mobile">
         <el-input v-model="addUserForm.mobile"></el-input>
       </el-form-item>
     </el-form>
