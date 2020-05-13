@@ -9,8 +9,19 @@ export default {
       total: 0,
       // 当前页
       pagenum: 1,
+      // 查询内容
       queryText: "",
-      state: true
+      // 用户状态
+      state: true,
+      // 添加用户表单对象
+      addUserForm: {
+        username: "",
+        password: "",
+        email: "",
+        mobile: ""
+      },
+      // 是否显示添加用户 对话框
+      dialogAddUserFormVisible: true
     };
   },
   created() {
