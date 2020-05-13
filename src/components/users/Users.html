@@ -19,7 +19,7 @@
       </el-input>
     </el-col>
     <el-col :span="8">
-      <el-button>添加用户</el-button>
+      <el-button @click="showAddUserDialog">添加用户</el-button>
     </el-col>
   </el-row>
   <!-- 表格部分 -->
@@ -78,9 +78,25 @@
   表格=>数据=>数组
   表单=>数据=>对象
   -->
-  <el-dialog title="添加用户" :visible.sync=" dialogAddUserFormVisible">
+  <!-- 展示 el-dialog
+  rules校验规则
+
+    给el-form添加rules`:rules='rules'` rules是一个对象
+    给每一个要校验的表单元素 添加`prop='username'`
+    设置rules校验对象
+  -->
+  <el-dialog
+    title="添加用户"
+    :visible.sync=" dialogAddUserFormVisible"
+    @closed="dialogClosed"
+  >
     <!-- 表单 -->
-    <el-form :rules="rules" :model="addUserForm" label-width="80px">
+    <el-form
+      :rules="rules"
+      :model="addUserForm"
+      label-width="80px"
+      ref="ruleForm"
+    >
       <el-form-item label="用户名" prop="username">
         <el-input v-model="addUserForm.username"></el-input>
       </el-form-item>
@@ -96,9 +112,7 @@
     </el-form>
     <div slot="footer" class="dialog-footer">
       <el-button @click=" dialogAddUserFormVisible = false">取 消</el-button>
-      <el-button type="primary" @click=" dialogAddUserFormVisible = false"
-        >确 定</el-button
-      >
+      <el-button type="primary" @click="addUser">确 定</el-button>
     </div>
   </el-dialog>
 </div>
