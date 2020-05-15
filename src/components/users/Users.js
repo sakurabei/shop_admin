@@ -204,6 +204,34 @@ export default {
           duration: 800
         });
       }
+    },
+    // 状态改变
+    async stateChanged(row) {
+      console.log("改了");
+      // 1.从row 对象里获取 id 和mg_state
+      // axios.put('users/:uId/state/:type)
+      const { id, mg_state: mgState } = row;
+      // 格式 axios.put(url,data,config)
+      let res = await axios.put(
+        `http://localhost:8888/api/private/v1/users/${id}/state/${mgState}`,
+        null,
+        {
+          headers: {
+            Authorization: localStorage.getItem("token")
+          }
+        }
+      );
+      console.log(res);
+      if (res.data.meta.status === 200) {
+        // 提示修改状态成功
+        this.$message({
+          message: "修改状态成功",
+          type: "success",
+          duration: 800
+        });
+        // 刷新当前页,这样更改状态之后，还在当前页，不会跑到别的页面上
+        this.loadUsersData(this.pagenum);
+      }
     }
   }
 };

@@ -2,20 +2,55 @@
 
 > A Vue.js project
 
-## Build Setup
+# 添加用户
 
-``` bash
-# install dependencies
-npm install
+1. 弹出对话框 ok
+2. 绑定表单数据
+3. 点击确定，发送请求，添加用户
+   > 添加之后处理
 
-# serve with hot reload at localhost:8080
-npm run dev
+- 1. 关闭对话框
+- 2. 刷新页面
+- 3. 提示成功
+- 4. 充值表单
 
-# build for production with minification
-npm run build
+# 假如有个需求，只要关闭对话框，就要重置表单
 
-# build for production and view the bundle analyzer report
-npm run build --report
+> 监听对话框的关闭
+> 事件 closed 对话框关闭了，会自动调用
+
+```js
+// 添加closed事件
+@closed="dialogClosed"
+// 监听对话框关闭
+dialogClosed(){
+  // console.log('对话框关闭了')
+  this.$refs.addUserForm.resetFileds()
+}
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+# 删除用户
+
+1. 注册事件 =>弹出确认框
+2. 自定义列 传递数据
+
+- @click ="delUser(scope.row.id)"
+- delUser(id){用 id}
+
+3. 发送请求删除用户
+
+- 格式：axios.delete(url,config)
+
+# 插槽
+
+# 修改状态
+
+1. 绑定当前用户自己的状态 v-model='scope.row.mg_state'
+2. 注册 change 事件，传递当前对象
+   @change='stateChange(scope.row)'
+
+3. stateChange(row){
+   const {id mg_state:mgState}=row;
+   }
+
+4. 格式：axios.put(url,data,config)
