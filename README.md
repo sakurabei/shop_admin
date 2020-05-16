@@ -54,3 +54,19 @@ dialogClosed(){
    }
 
 4. 格式：axios.put(url,data,config)
+
+# 总结格式（注意一下）
+
+- axios.get(url,config) config={params,headers}
+- axios.delete(url,config)
+
+- axios.post(url,data,config)
+- axios.put(url,data,config)
+
+# axios的三个问题
+
+- 问题1.每次都要添加基准路径
+> 在main.js配置一下
+```js
+axios.defaults.baseURL = 'https://api.example.com'
+```

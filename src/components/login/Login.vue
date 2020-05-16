@@ -64,7 +64,7 @@ export default {
         }
         // console.log("开始登陆");
         let res = await axios.post(
-          "http://localhost:8888/api/private/v1/login",
+          "login",
           this.ruleForm
         );
         console.log(res);

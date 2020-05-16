@@ -75,7 +75,7 @@ export default {
   },
   methods: {
     async loadUsersData(pagenum = 1, query = "") {
-      const url = "http://localhost:8888/api/private/v1/users";
+      const url = "users";
       const config = {
         params: {
           query,
@@ -135,15 +135,11 @@ export default {
     async addUser() {
       // 收集表单数据，发送请求
       // 格式：axios.post(url,data,config)
-      let res = await axios.post(
-        "http://localhost:8888/api/private/v1/users",
-        this.addUserForm,
-        {
-          headers: {
-            Authorization: localStorage.getItem("token")
-          }
+      let res = await axios.post("users", this.addUserForm, {
+        headers: {
+          Authorization: localStorage.getItem("token")
         }
-      );
+      });
       // console.log(res);
       if (res.data.meta.status === 201) {
         // 1.关闭对话框
@@ -178,14 +174,11 @@ export default {
         // 发送请求删除用户
         // axios.delete(url,config)
         //     params: {
-        let res = await axios.delete(
-          `http://localhost:8888/api/private/v1/users/${id}`,
-          {
-            headers: {
-              Authorization: localStorage.getItem("token")
-            }
+        let res = await axios.delete(`users/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem("token")
           }
-        );
+        });
         if (res.data.meta.status === 200) {
           // 1.刷新页面
           this.loadUsersData();
@@ -212,15 +205,11 @@ export default {
       // axios.put('users/:uId/state/:type)
       const { id, mg_state: mgState } = row;
       // 格式 axios.put(url,data,config)
-      let res = await axios.put(
-        `http://localhost:8888/api/private/v1/users/${id}/state/${mgState}`,
-        null,
-        {
-          headers: {
-            Authorization: localStorage.getItem("token")
-          }
+      let res = await axios.put(`users/${id}/state/${mgState}`, null, {
+        headers: {
+          Authorization: localStorage.getItem("token")
         }
-      );
+      });
       console.log(res);
       if (res.data.meta.status === 200) {
         // 提示修改状态成功
