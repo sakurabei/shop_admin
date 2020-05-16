@@ -13,7 +13,8 @@ import './assets/css/common.css'
 // 1.每次都需要添加基准路径
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8888/api/private/v1/'
-
+// 2. 每个组件页面都要引入axios
+Vue.prototype.$axios = axios
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

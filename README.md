@@ -63,10 +63,16 @@ dialogClosed(){
 - axios.post(url,data,config)
 - axios.put(url,data,config)
 
-# axios的三个问题
+# axios 的三个问题
 
-- 问题1.每次都要添加基准路径
-> 在main.js配置一下
+- 问题 1.每次都要添加基准路径
+  > 在 main.js 配置一下
+
 ```js
-axios.defaults.baseURL = 'https://api.example.com'
+axios.defaults.baseURL = "https://api.example.com";
 ```
+
+- 问题 2.每个组件页面都要引入 axios
+  > main.js
+  > 给 vue 的原型加：Vue.prototype.\$axios = axios
+  > 所有的 vue 实例都可以使用，组件本质就是 vue 实例 this.\$axios

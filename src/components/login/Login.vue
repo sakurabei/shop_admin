@@ -28,7 +28,6 @@ el-form-item表单元素组件
 
 <script>
 /* eslint-disable */
-import axios from "axios";
 export default {
   data() {
     return {
@@ -63,7 +62,7 @@ export default {
           return alert("格式不正确");
         }
         // console.log("开始登陆");
-        let res = await axios.post(
+        let res = await this.$axios.post(
           "login",
           this.ruleForm
         );

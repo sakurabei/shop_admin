@@ -1,5 +1,4 @@
 /* eslint-disable */
-import axios from "axios";
 export default {
   data() {
     return {
@@ -86,7 +85,7 @@ export default {
           Authorization: localStorage.getItem("token")
         }
       };
-      let res = await axios.get(url, config);
+      let res = await this.$axios.get(url, config);
 
       console.log(res);
       // 保存列表数据
@@ -95,7 +94,7 @@ export default {
       this.total = res.data.data.total;
       // 保存当前页码
       this.pagenum = res.data.data.pagenum;
-      // axios
+      // this.$axios
       //   .get('http://localhost:8888/api/private/v1/users', {
       //     params: {
       //       query,
@@ -134,8 +133,8 @@ export default {
     //添加用户
     async addUser() {
       // 收集表单数据，发送请求
-      // 格式：axios.post(url,data,config)
-      let res = await axios.post("users", this.addUserForm, {
+      // 格式：this.$axios.post(url,data,config)
+      let res = await this.$axios.post("users", this.addUserForm, {
         headers: {
           Authorization: localStorage.getItem("token")
         }
@@ -172,9 +171,9 @@ export default {
           type: "warning"
         });
         // 发送请求删除用户
-        // axios.delete(url,config)
+        // this.$axios.delete(url,config)
         //     params: {
-        let res = await axios.delete(`users/${id}`, {
+        let res = await this.$axios.delete(`users/${id}`, {
           headers: {
             Authorization: localStorage.getItem("token")
           }
@@ -202,10 +201,10 @@ export default {
     async stateChanged(row) {
       console.log("改了");
       // 1.从row 对象里获取 id 和mg_state
-      // axios.put('users/:uId/state/:type)
+      // this.$axios.put('users/:uId/state/:type)
       const { id, mg_state: mgState } = row;
-      // 格式 axios.put(url,data,config)
-      let res = await axios.put(`users/${id}/state/${mgState}`, null, {
+      // 格式 this.$axios.put(url,data,config)
+      let res = await this.$axios.put(`users/${id}/state/${mgState}`, null, {
         headers: {
           Authorization: localStorage.getItem("token")
         }
