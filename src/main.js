@@ -24,7 +24,27 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
   return Promise.reject(error)
 })
+// 响应拦截器里
+// axios.interceptors.response.use(
+//   function (response) {
+//     // 方式1 :
+//     if (response.data.meta.status === 100010) {
+//       // 1.跳转 过登录页
+//       this.$router.push('/login')
+//     }
 
+//     // 方式2 :
+//     if (response.data.data.token) {
+//       localStorage.setItem('token', token)
+//     }
+
+//     return response
+//   },
+//   function (error) {
+//     // Do something with response error
+//     return Promise.reject(error)
+//   }
+// )
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

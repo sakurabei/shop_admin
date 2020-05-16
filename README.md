@@ -96,3 +96,25 @@ axios.interceptors.request.use(
   }
 );
 ```
+
+# token 过期了怎么处理？？？
+
+ <!-- 相应拦截 -->
+
+- 方式 1：我们和后台约定好，100010（过期），过期了怎么办？跳转到登录页
+
+```js
+// 方式1：
+if (response.data.meta.status === 100010) {
+  // 跳转 过登录页
+  this.$router.push("/login");
+}
+```
+
+- 方式 2： 和后台约定好，7 天过期（六天的时候），返回给我们一个 token 字段
+  > 返回给我们的 token 是最新的，把本地旧的替换掉
+  ```js
+  if (response.data.data.token) {
+    localStorage.setItem("token", token);
+  }
+  ```
