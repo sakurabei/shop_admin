@@ -15,6 +15,16 @@ import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:8888/api/private/v1/'
 // 2. 每个组件页面都要引入axios
 Vue.prototype.$axios = axios
+// 3.解决每次请求都需要呆着token值
+axios.interceptors.request.use(function (config) {
+  config.headers.Authorization = localStorage.getItem('token')
+  // config.headers.Authorization = localStorage.getItem('token')
+  console.log('修改了')
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
+
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

@@ -80,9 +80,6 @@ export default {
           query,
           pagenum,
           pagesize: 2
-        },
-        headers: {
-          Authorization: localStorage.getItem("token")
         }
       };
       let res = await this.$axios.get(url, config);
@@ -134,11 +131,7 @@ export default {
     async addUser() {
       // 收集表单数据，发送请求
       // 格式：this.$axios.post(url,data,config)
-      let res = await this.$axios.post("users", this.addUserForm, {
-        headers: {
-          Authorization: localStorage.getItem("token")
-        }
-      });
+      let res = await this.$axios.post("users", this.addUserForm);
       // console.log(res);
       if (res.data.meta.status === 201) {
         // 1.关闭对话框
@@ -173,11 +166,7 @@ export default {
         // 发送请求删除用户
         // this.$axios.delete(url,config)
         //     params: {
-        let res = await this.$axios.delete(`users/${id}`, {
-          headers: {
-            Authorization: localStorage.getItem("token")
-          }
-        });
+        let res = await this.$axios.delete(`users/${id}`);
         if (res.data.meta.status === 200) {
           // 1.刷新页面
           this.loadUsersData();
@@ -204,11 +193,7 @@ export default {
       // this.$axios.put('users/:uId/state/:type)
       const { id, mg_state: mgState } = row;
       // 格式 this.$axios.put(url,data,config)
-      let res = await this.$axios.put(`users/${id}/state/${mgState}`, null, {
-        headers: {
-          Authorization: localStorage.getItem("token")
-        }
-      });
+      let res = await this.$axios.put(`users/${id}/state/${mgState}`);
       console.log(res);
       if (res.data.meta.status === 200) {
         // 提示修改状态成功
