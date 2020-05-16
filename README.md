@@ -73,6 +73,26 @@ axios.defaults.baseURL = "https://api.example.com";
 ```
 
 - 问题 2.每个组件页面都要引入 axios
+
   > main.js
   > 给 vue 的原型加：Vue.prototype.\$axios = axios
   > 所有的 vue 实例都可以使用，组件本质就是 vue 实例 this.\$axios
+
+- 问题 3. 每次请求都要携带 token
+  > 使用 请求拦截器，每次发送请求都要经过这个拦截器，我们就不要每次写代码的时候，自己写 token
+  > 让拦截器帮我们去添加这个 token
+
+```js
+// 3.解决每次请求都需要呆着token值
+axios.interceptors.request.use(
+  function(config) {
+    config.headers.Authorization = localStorage.getItem("token");
+    // config.headers.Authorization = localStorage.getItem('token')
+    console.log("修改了");
+    return config;
+  },
+  function(error) {
+    return Promise.reject(error);
+  }
+);
+```
