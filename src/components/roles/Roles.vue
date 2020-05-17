@@ -2,6 +2,7 @@
 <template>
   <div>
     <el-table :data="rolesData" style="width: 100%">
+      <el-table-column type="index" :index="indexMethod"></el-table-column>
       <el-table-column prop="roleName" label="角色名称" width="180"></el-table-column>
       <el-table-column prop="roleDesc" label="描述" width="180"></el-table-column>
       <el-table-column label="操作">
@@ -37,6 +38,9 @@ export default {
       let res = await this.$axios.get(`roles`);
       console.log(res);
       this.rolesData = res.data.data;
+    },
+    indexMethod(index) {
+      return index;
     }
   }
 };
