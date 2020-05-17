@@ -52,7 +52,7 @@
        -->
       <template slot-scope="scope">
         <el-button
-          @click="showEditUserDialog"
+          @click="showEditUserDialog(scope.row)"
           plain
           type="primary"
           icon="el-icon-edit"

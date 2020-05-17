@@ -118,3 +118,11 @@ if (response.data.meta.status === 100010) {
     localStorage.setItem("token", token);
   }
   ```
+
+# 编辑用户
+
+1. 弹出对话框 ok
+2. 展示已知信息
+   > 点击编辑小图标的时候，获取当前行的对象=>通过方法传递=>赋值给 editUserForm（表单绑定过的）
+3. 发送请求
+

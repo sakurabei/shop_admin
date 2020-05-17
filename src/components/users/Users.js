@@ -69,8 +69,8 @@ export default {
       dialogEditUserFormVisible: false,
       editUserform: {
         username: "春春",
-        email:'',
-        mobile:''
+        email: "",
+        mobile: ""
       }
     };
   },
@@ -212,7 +212,15 @@ export default {
         this.loadUsersData(this.pagenum);
       }
     },
-    showEditUserDialog() {
+    // 显示编辑用户对话框
+    showEditUserDialog(row) {
+      // 1.获取 用户名 邮箱 电话
+      const { username, email, mobile } = row;
+      // 2.赋值给绑定表单的数据对象，editUserForm
+      this.editUserform.username = username;
+      this.editUserform.email = email;
+      this.editUserform.mobile = mobile;
+      // 点击时，编辑表单弹窗出现
       this.dialogEditUserFormVisible = true;
     }
   }
