@@ -65,6 +65,12 @@ export default {
             trigger: "blur"
           }
         ]
+      },
+      dialogEditUserFormVisible: false,
+      editUserform: {
+        username: "春春",
+        email:'',
+        mobile:''
       }
     };
   },
@@ -205,6 +211,9 @@ export default {
         // 刷新当前页,这样更改状态之后，还在当前页，不会跑到别的页面上
         this.loadUsersData(this.pagenum);
       }
+    },
+    showEditUserDialog() {
+      this.dialogEditUserFormVisible = true;
     }
   }
 };

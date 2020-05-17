@@ -52,6 +52,7 @@
        -->
       <template slot-scope="scope">
         <el-button
+          @click="showEditUserDialog"
           plain
           type="primary"
           icon="el-icon-edit"
@@ -118,6 +119,27 @@
     <div slot="footer" class="dialog-footer">
       <el-button @click=" dialogAddUserFormVisible = false">取 消</el-button>
       <el-button type="primary" @click="addUser">确 定</el-button>
+    </div>
+  </el-dialog>
+  <!-- 第二对话框 - 编辑用户对话框 -->
+  <el-dialog title="编辑用户" :visible.sync="dialogEditUserFormVisible">
+    <el-form :model="editUserform" label-width="80px">
+      <el-form-item label="用户名">
+        <!-- <el-input v-model="editUserform.username" autocomplete="off"></el-input> -->
+        <el-tag>{{editUserform.username}}</el-tag>
+      </el-form-item>
+      <el-form-item label="邮箱">
+        <el-input v-model="editUserform.email" autocomplete="off"></el-input>
+      </el-form-item>
+      <el-form-item label="电话">
+        <el-input v-model="editUserform.mobile" autocomplete="off"></el-input>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="dialogEditUserFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="dialogEditUserFormVisible= false"
+        >确 定</el-button
+      >
     </div>
   </el-dialog>
 </div>
