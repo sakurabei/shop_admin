@@ -68,6 +68,7 @@ export default {
       },
       dialogEditUserFormVisible: false,
       editUserform: {
+        id: "",
         username: "春春",
         email: "",
         mobile: ""
@@ -215,13 +216,36 @@ export default {
     // 显示编辑用户对话框
     showEditUserDialog(row) {
       // 1.获取 用户名 邮箱 电话
-      const { username, email, mobile } = row;
+      const { username, email, mobile, id } = row;
       // 2.赋值给绑定表单的数据对象，editUserForm
       this.editUserform.username = username;
       this.editUserform.email = email;
       this.editUserform.mobile = mobile;
+      this.editUserform.id = id;
       // 点击时，编辑表单弹窗出现
       this.dialogEditUserFormVisible = true;
+    },
+    async editUser() {
+      // 1.从编辑用户对象里读取需要的数据
+      const { id, email, mobile } = this.editUserform;
+      // axios.put(url,ddata,config)
+      let res = await this.$axios.put(`users/${id}`, {
+        email,
+        mobile
+      });
+      console.log(res);
+      if (res.data.meta.status === 200) {
+        // 1. 关闭对话框
+        this.dialogEditUserFormVisible = false;
+        // 2.刷新页面
+        this.loadUsersData(this.pagenum);
+        // 3.提示
+        this.$message({
+          message: "更新成功",
+          type: "success",
+          duration: 800
+        });
+      }
     }
   }
 };
