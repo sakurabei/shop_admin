@@ -2,6 +2,7 @@
 <template>
   <div>
     <el-table :data="rightsData" style="width: 100%">
+      <el-table-column type="index" :index="indexMethod"></el-table-column>
       <el-table-column prop="authName" label="权限名称" width="180"></el-table-column>
       <el-table-column prop="path" label="路径" width="180"></el-table-column>
       <el-table-column label="等级">
@@ -14,7 +15,6 @@
     </el-table>
   </div>
 </template>
-
 <script>
 /* eslint-disable */
 export default {
@@ -37,6 +37,10 @@ export default {
       let res = await this.$axios.get(`rights/list`);
       console.log(res);
       this.rightsData = res.data.data;
+    },
+    indexMethod(index) {
+      // console.log(index);
+      return index;
     }
   }
 };
