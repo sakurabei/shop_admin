@@ -126,3 +126,81 @@ if (response.data.meta.status === 100010) {
    > 点击编辑小图标的时候，获取当前行的对象=>通过方法传递=>赋值给 editUserForm（表单绑定过的）
 3. 发送请求
 
+# 权限列表
+
+1. 表格展示
+2. 请求权限数据
+3. 处理等级
+
+```js
+<template slot-scope="scope">
+  <span v-if="scope.row.level == 0">一级</span>
+  <span v-else-if="scope.row.level==1">二级</span>
+  <span v-else>三级</span>
+</template>
+```
+
+4. 处理索引
+   > 添加 type 属性 值:index 索引号就有了 从 1 开始的
+
+- <el-table-column type='index' :index='indexMethod'></el-table-column>
+
+- indexMethod( index ) { // index 就是从 0 开始的
+  return index
+  }
+
+# 角色列表
+
+1. 表格基本 展示
+2. 发送请求获取角色数据
+3. 赋值之后，有个小问题，降低成本
+
+element
+`npm i element-ui@2.4.11`
+
+4. 索引
+
+# 抽离三个部分
+
+# 用户 - 角色 - 权限 三者之间的关系
+
+    <=2=     <=1=
+
+张三 主管 商品管理/订单管理/商品 列表
+
+> 接下来要做的是 给`用户分配权限`
+
+# 角色列表（左边）- 展示权限信息
+
+1. 展开行功能
+
+```js
+<el-table-column type="expand">
+  <template slot-scope="scope">
+    <p>哈哈</p>
+  </template>
+</el-table-column>
+```
+
+2. 三层 代码 01
+
+```html
+<template slot-scope="scope">
+  <!-- 第一层 -->
+  <el-row v-for="item1 in scope.row.children" :key="item1.id">
+    <el-col :span="4">{{ item1.authName }}</el-col>
+    <el-col :span="20">
+      <!-- 第二层  -->
+      <el-row v-for="item2 in item1.children" :key="item2.id">
+        <el-col :span="4">{{ item2.authName }}</el-col>
+        <el-col :span="20">
+          <!-- 第三层 -->
+          <span v-for="item3 in item2.children" :key="item3.id"
+            >{{ item3.authName }}</span
+          >
+        </el-col>
+      </el-row>
+    </el-col>
+  </el-row>
+</template>
+```

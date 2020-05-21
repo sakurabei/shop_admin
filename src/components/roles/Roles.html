@@ -1,5 +1,26 @@
 <div>
   <el-table :data="rolesData" style="width: 100%">
+    <!-- 展开行开始---------------------- -->
+    <el-table-column type="expand">
+      <template slot-scope="scope">
+        <!--第一层  -->
+        <el-row v-for="item1 in scope.row.children" :key="item1.id">
+          <el-col :span="4">{{item1.authName}}</el-col>
+          <el-col :span="20">
+            <!-- 第二层 -->
+            <el-row v-for="item2 in item1.children" :key="item2">
+              <el-col :span="4">{{item2.authName}}</el-col>
+              <el-col :span="20">
+                <!-- 第三层 -->
+                <span v-for="item3 in item2.children" :key="item3">{{item3.authName}}</span>
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-col>
+        </el-row>
+      </template>
+    </el-table-column>
+    <!-- 展开航结束 -->
     <el-table-column type="index" :index="indexMethod"></el-table-column>
     <el-table-column
       prop="roleName"
