@@ -4,15 +4,15 @@
     <el-table-column type="expand">
       <template slot-scope="scope">
         <!--第一层  -->
-        <el-row v-for="item1 in scope.row.children" :key="item1.id">
-          <el-col :span="4">{{item1.authName}}</el-col>
+        <el-row v-for="item1 in scope.row.children" :key="item1.id" class="row1">
+          <el-col :span="4"><el-tag type="primary" closable>{{item1.authName}} </el-tag></el-col>
           <el-col :span="20">
             <!-- 第二层 -->
-            <el-row v-for="item2 in item1.children" :key="item2">
-              <el-col :span="4">{{item2.authName}}</el-col>
+            <el-row v-for="item2 in item1.children" :key="item2" class="row2">
+              <el-col :span="4"><el-tag type="success"  closable>{{item2.authName}}</el-tag></el-col>
               <el-col :span="20">
                 <!-- 第三层 -->
-                <span v-for="item3 in item2.children" :key="item3">{{item3.authName}}</span>
+                <el-tag v-for="item3 in item2.children" :key="item3" type="warning" class="tag" closable>{{item3.authName}}</el-tag>
               </el-col>
             </el-row>
           </el-col>
