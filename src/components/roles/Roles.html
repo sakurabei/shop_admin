@@ -57,13 +57,13 @@
       ：default-expanded-keys="[2,3]" 默认展开
       ：default-checked-keys="[5]" 默认选中
       ：props="defaultProps" 配置项
+      :default-expand-all ="true" 全部默认展开
     -->
     <el-tree
-        :data="data"
+        :data="treeData"
         show-checkbox
         node-key="id"
-        :default-expanded-keys="[2, 3]"
-        :default-checked-keys="[5]"
+        :default-expand-all ="true"
         :props="defaultProps">
     </el-tree>
     <div slot="footer" class="dialog-footer">

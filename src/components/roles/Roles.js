@@ -10,7 +10,7 @@ export default {
       ],
       // 是否显示 对话框
       dialogAssignRightsVisible: true,
-      data: [
+      treeData: [
         {
           id: 1,
           label: "一级 1",
@@ -64,22 +64,28 @@ export default {
         // children:负责显示结构
         children: "children",
         // label:负责显示标题
-        label: "label"
+        label: "authName"
       }
     };
   },
   created() {
     this.loadRolesData();
+    this.loadAllRightsData();
   },
   methods: {
     // 加载角色列表的数据
     async loadRolesData() {
       let res = await this.$axios.get(`roles`);
-      console.log(res);
+      // console.log(res);
       this.rolesData = res.data.data;
     },
     indexMethod(index) {
       return index;
+    },
+    async loadAllRightsData() {
+      let res = await this.$axios.get(`rights/tree`);
+      console.log(res);
+      this.treeData = res.data.data;
     }
   }
 };
