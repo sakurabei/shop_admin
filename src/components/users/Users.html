@@ -148,8 +148,13 @@
       </el-form-item>
       <el-form-item label="角色列表">
         <el-select v-model="assignRoleForm.rid" placeholder="请选择角色">
-          <el-option label="区域一" value="shanghai"></el-option>
-          <el-option label="区域二" value="beijing"></el-option>
+          <!-- label ：负责显示的 value：负责收集数据 -->
+          <el-option
+            v-for="item in rolesData"
+            :label="item.roleName"
+            value="item.id"
+            :key="item.id"
+          ></el-option>
         </el-select>
       </el-form-item>
     </el-form>

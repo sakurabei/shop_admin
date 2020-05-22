@@ -76,16 +76,20 @@ export default {
       },
       // 是否显示分配角色对话框
       dialogAssignRoleVisible: true,
+      // 分配角色表单对象
       assignRoleForm: {
         username: "",
         id: 0,
         rid: ""
-      }
+      },
+      // 角色列表
+      rolesData: []
     };
   },
   created() {
     // 加载用户列表数据
     this.loadUsersData();
+    this.loadRolesData();
   },
   methods: {
     async loadUsersData(pagenum = 1, query = "") {
@@ -233,6 +237,7 @@ export default {
       // 点击时，编辑表单弹窗出现
       this.dialogEditUserFormVisible = true;
     },
+    // 编辑用户
     async editUser() {
       // 1.从编辑用户对象里读取需要的数据
       const { id, email, mobile } = this.editUserform;
@@ -254,6 +259,11 @@ export default {
           duration: 800
         });
       }
+    },
+    async loadRolesData() {
+      let res = await this.$axios.get("roles");
+      // console.log(res);
+      this.rolesData = res.data.data;
     }
   }
 };
