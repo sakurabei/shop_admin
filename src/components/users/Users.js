@@ -66,12 +66,20 @@ export default {
           }
         ]
       },
+      // 是否显示编辑用户对话框
       dialogEditUserFormVisible: false,
       editUserform: {
         id: "",
         username: "春春",
         email: "",
         mobile: ""
+      },
+      // 是否显示分配角色对话框
+      dialogAssignRoleVisible: true,
+      assignRoleForm: {
+        username: "",
+        id: 0,
+        rid: ""
       }
     };
   },
