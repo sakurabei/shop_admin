@@ -42,7 +42,8 @@
           type="danger"
           icon="el-icon-delete"
         ></el-button>
-        <el-button plain size="mini" type="success" icon="el-icon-check"
+        <!-- 再点击的时候，将数据传递过去，并且在列表中显示 -->
+        <el-button @click="showAssignRihtsDialog(scope.row)" plain size="mini" type="success" icon="el-icon-check"
           >分配角色</el-button
         >
       </template>
@@ -60,6 +61,7 @@
       :default-expand-all ="true" 全部默认展开
     -->
     <el-tree
+        ref="tree"
         :data="treeData"
         show-checkbox
         node-key="id"

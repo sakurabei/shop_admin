@@ -9,7 +9,7 @@ export default {
         }
       ],
       // 是否显示 对话框
-      dialogAssignRightsVisible: true,
+      dialogAssignRightsVisible: false,
       treeData: [
         {
           id: 1,
@@ -79,13 +79,37 @@ export default {
       // console.log(res);
       this.rolesData = res.data.data;
     },
+    // 处理索引
     indexMethod(index) {
       return index;
     },
+    // 获取所有的权限信息
     async loadAllRightsData() {
       let res = await this.$axios.get(`rights/tree`);
       console.log(res);
       this.treeData = res.data.data;
+    },
+    // 显示分配权限对话框
+    showAssignRihtsDialog(row) {
+      this.dialogAssignRightsVisible = true;
+      // 获取第三层的id
+      let keys = [];
+      row.children.forEach(item1 => {
+        item1.children.forEach(item2 => {
+          item2.children.forEach(item3 => {
+            console.log(item3.id);
+            keys.push(item3.id);
+          });
+        });
+      });
+      // 原因异步DOM更新，打印有点早了，
+      // DOM更新完毕了，在获取
+      // nextTick
+      this.$nextTick(() => {
+        console.log(this.$refs.tree);
+        // 这个是element-UI自带的通过传递消息，获取数据
+        this.$refs.tree.setCheckedKeys(keys)
+      });
     }
   }
 };
