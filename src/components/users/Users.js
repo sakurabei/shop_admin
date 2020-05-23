@@ -75,7 +75,7 @@ export default {
         mobile: ""
       },
       // 是否显示分配角色对话框
-      dialogAssignRoleVisible: true,
+      dialogAssignRoleVisible: false,
       // 分配角色表单对象
       assignRoleForm: {
         username: "",
@@ -264,6 +264,45 @@ export default {
       let res = await this.$axios.get("roles");
       // console.log(res);
       this.rolesData = res.data.data;
+      console.log(this.rolesData);
+    },
+    // 显示分配角色的对话框
+    async showAssignRoleDialog(row) {
+      this.dialogAssignRoleVisible = true;
+      // 打印
+      // console.log(row);
+      // 对象里，需要三个参数 id username rid
+      const { id, username } = row;
+      // rid 在row中没有，但是留了一个接口，可以使用id 去请求获取
+      // 根据 id 查询用户信息
+      let res = await this.$axios.get(`users/${id}`);
+      console.log(res);
+      // 把三个参数 赋值给assignRoleForm对象
+      this.assignRoleForm.id = id;
+      this.assignRoleForm.username = username;
+      this.assignRoleForm.rid =res.data.data.rid==-1?'':res.data.data.rid;
+    },
+    // 分配角色
+    async assignRole() {
+      // 获取需要的参数
+      let { id, rid } = this.assignRoleForm;
+      // 请求
+      let res = await this.$axios.put(`users/${id}/role`, {
+        rid
+      });
+      // console.log(res);
+      if (res.data.meta.status === 200) {
+        // 1.关闭对话框
+        this.dialogAssignRoleVisible = false;
+        // 2. 提示
+        this.$message({
+          message: "分配角色成功",
+          type: "success",
+          duration: 800
+        });
+        // 3. 刷新
+        this.loadUsersData(this.pagenum);
+      }
     }
   }
 };
