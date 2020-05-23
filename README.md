@@ -204,3 +204,92 @@ element
   </el-row>
 </template>
 ```
+
+# 角色列表（右边）
+
+1. 弹出对话框
+
+- 参考 ： Tree 树形组件 ->默认展开和默认选中
+
+2. 展示 所有的权限信息
+
+```js
+defaultProps: {
+    // children 负责显示结构
+    children: 'children',
+    // label : 负责显示标题
+    label: 'authName'
+  }
+```
+
+3. 展示当前拥有的权限信息
+4. 发送后台
+
+```js
+> 参数1： roleId（角色id） 参数2：rids(权限信息的id)
+> roleId: 点击弹窗的时候，传row 的id 保存起来了
+> rids => 获取当前选中的权限（√）+获取当前半选中的权限（-）
+
+```
+# pid
+
+{
+name :'上海市',
+id : 1,
+pid :0
+children :[
+{
+id : 2
+pid : 1,
+name :'静安区',
+children : [
+{
+id :4,
+pid :'1,2'
+name :'静安寺'
+}
+]
+},
+{
+id : 3,
+pid : 1
+name :'浦东新区'
+}
+]
+}
+
+# 分配角色
+1. 弹出对话框 ok
+2. 展示所有的角色信息
+    > el-option
+    > label:负责展示的 :label='item.roleName'
+    > value: 负责收集数据：value ='item.id'
+3. 展示当前的角色信息
+    > 1. 传row 过来 获取三个参数，但是只有两个参数 id 和 username,用id再次获取信息得到 rid
+    > 2. 把id ueername rid 都赋值给 assignRoleForm
+    > 3. 稍微处理一下 rid = -1
+4. 发送请求
+```js
+// 分配角色
+    async assignRole() {
+      // 获取需要的参数
+      let { id, rid } = this.assignRoleForm;
+      // 请求
+      let res = await this.$axios.put(`users/${id}/role`, {
+        rid
+      });
+      // console.log(res);
+      if (res.data.meta.status === 200) {
+        // 1.关闭对话框
+        this.dialogAssignRoleVisible = false;
+        // 2. 提示
+        this.$message({
+          message: "分配角色成功",
+          type: "success",
+          duration: 800
+        });
+        // 3. 刷新
+        this.loadUsersData(this.pagenum);
+      }
+    }
+```
