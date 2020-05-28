@@ -7,7 +7,7 @@ import Home from "../components/home/Home.vue";
 import Users from "../components/users/Users.vue";
 import Roles from "../components/roles/Roles.vue";
 import Rights from "../components/rights/Rights.vue";
-
+import Categories from "../components/categories/Categories.vue"
 // 在模块化工程中Vue.use()
 Vue.use(VueRouter);
 
@@ -23,7 +23,8 @@ const router = new VueRouter({
       children: [
         { path: "/roles", name: "roles", component: Roles },
         { path: "/users/:page?", name: "users", component: Users },
-        { path: "/rights", name: "rights", component: Rights }
+        { path: "/rights", name: "rights", component: Rights },
+        { path: "/categories", name: "categories", component: Categories }
       ]
     }
   ]
