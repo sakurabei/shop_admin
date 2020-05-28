@@ -26,31 +26,25 @@
         -->
         <el-menu
           :router="true"
-          default-active="2"
+          :default-active="$route.path"
           background-color="#545c64"
           text-color="#fff"
           active-text-color="#ffd04b"
         >
           <!-- 用户管理 -->
-          <el-submenu index="1">
+          <!-- :index="item.id" 点击哪个展开哪个 -->
+          <el-submenu :index="item.id+''" v-for="item in menus" :key="item.id">
             <!-- 标题 -->
             <template slot="title">
               <i class="el-icon-location"></i>
-              <span>用户管理</span>
+              <span>{{item.authName}}</span>
             </template>
             <!-- 菜单元素 -->
-            <el-menu-item index="/users">用户列表</el-menu-item>
-          </el-submenu>
-          <!-- 权限管理 -->
-          <el-submenu index="2">
-            <!-- 标题 -->
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>权限管理</span>
-            </template>
-            <!-- 菜单元素 -->
-            <el-menu-item index="/roles">角色列表</el-menu-item>
-            <el-menu-item index="/rights">权限列表</el-menu-item>
+            <el-menu-item
+              v-for="item1 in item.children"
+              :key="item1.id"
+              :index="'/'+item1.path"
+            >{{item1.authName}}</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-aside>
@@ -65,6 +59,14 @@
 <script>
 /* eslint-disable */
 export default {
+  data() {
+    return {
+      menus: []
+    };
+  },
+  created() {
+    this.loadMenusData();
+  },
   methods: {
     //退出
     async logout() {
@@ -114,6 +116,12 @@ export default {
       //     duration: 800
       //   });
       // });
+    },
+    // 加载菜单
+    async loadMenusData() {
+      let res = await this.$axios.get("menus");
+      console.log(res);
+      this.menus = res.data.data;
     }
   }
 };

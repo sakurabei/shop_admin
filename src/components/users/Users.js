@@ -151,7 +151,7 @@ export default {
       // 收集表单数据，发送请求
       // 格式：this.$axios.post(url,data,config)
       let res = await this.$axios.post("users", this.addUserForm);
-      // console.log(res);
+       console.log(res);
       if (res.data.meta.status === 201) {
         // 1.关闭对话框
         this.dialogAddUserFormVisible = false;
