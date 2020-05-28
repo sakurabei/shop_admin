@@ -231,6 +231,7 @@ defaultProps: {
 > rids => 获取当前选中的权限（√）+获取当前半选中的权限（-）
 
 ```
+
 # pid
 
 {
@@ -259,16 +260,18 @@ name :'浦东新区'
 }
 
 # 分配角色
+
 1. 弹出对话框 ok
 2. 展示所有的角色信息
-    > el-option
-    > label:负责展示的 :label='item.roleName'
-    > value: 负责收集数据：value ='item.id'
+   > el-option
+   > label:负责展示的 :label='item.roleName'
+   > value: 负责收集数据：value ='item.id'
 3. 展示当前的角色信息
-    > 1. 传row 过来 获取三个参数，但是只有两个参数 id 和 username,用id再次获取信息得到 rid
-    > 2. 把id ueername rid 都赋值给 assignRoleForm
-    > 3. 稍微处理一下 rid = -1
+   > 1. 传 row 过来 获取三个参数，但是只有两个参数 id 和 username,用 id 再次获取信息得到 rid
+   > 2. 把 id ueername rid 都赋值给 assignRoleForm
+   > 3. 稍微处理一下 rid = -1
 4. 发送请求
+
 ```js
 // 分配角色
     async assignRole() {
@@ -293,3 +296,37 @@ name :'浦东新区'
       }
     }
 ```
+
+# 左侧栏
+
+> 动态动态获取权限菜单
+
+> 1. 发送请求获取权限数据
+> 2. 两层 v-for
+> 3. 一点开，全部都开了
+>    el-submenu => index => 不能唯一
+>    <el-submenu :index="item.id+''">
+>    el-menu-item 里的 index 作为 path 参与跳转
+>    <el-menu-item :indx="'/'+item1.path">
+
+> 5. 刷新可以获取 url 中哈希值里的路径
+>    :default-active ="\$route.path"=>/users
+
+# 保留页数
+
+> 思路： 我们可以把页面保存到 url 路径里面，以后直接获取就知道第几页了
+> 上 => 下
+
+1. path:'/users/:page?'
+2. 获取 page 发送请求
+   const page = this.\$route.params.page
+   this.loadUsersData(page)
+3. 已经做好的
+   this.pagenum = res.data.data.pagenum
+
+> 下=> 上
+
+1.  点击页码
+    this.$router.push('/users/'+curPage)
+
+>

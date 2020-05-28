@@ -87,8 +87,12 @@ export default {
     };
   },
   created() {
+    // 获取路由 参数=> 页码
+    const page = this.$route.params.page;
+    console.log(page);
     // 加载用户列表数据
-    this.loadUsersData();
+    // 刷新 之后仍然是这一页
+    this.loadUsersData(page);
     this.loadRolesData();
   },
   methods: {
@@ -134,6 +138,8 @@ export default {
     // 点击页码
     clickCurrentPage(curPage) {
       console.log(curPage);
+      // 改变入口路径
+      this.$router.push("/users/" + curPage);
       // 传递参数 加载当前页的内容
       this.loadUsersData(curPage, this.queryText);
     },
@@ -151,7 +157,7 @@ export default {
       // 收集表单数据，发送请求
       // 格式：this.$axios.post(url,data,config)
       let res = await this.$axios.post("users", this.addUserForm);
-       console.log(res);
+      console.log(res);
       if (res.data.meta.status === 201) {
         // 1.关闭对话框
         this.dialogAddUserFormVisible = false;
@@ -280,7 +286,8 @@ export default {
       // 把三个参数 赋值给assignRoleForm对象
       this.assignRoleForm.id = id;
       this.assignRoleForm.username = username;
-      this.assignRoleForm.rid =res.data.data.rid==-1?'':res.data.data.rid;
+      this.assignRoleForm.rid =
+        res.data.data.rid == -1 ? "" : res.data.data.rid;
     },
     // 分配角色
     async assignRole() {
