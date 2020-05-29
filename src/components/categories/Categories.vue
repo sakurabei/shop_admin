@@ -31,13 +31,13 @@
           <el-input v-model="addCatForm.cat_name" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="父级名称">
-          <el-select
+          <!-- 级联选择器 -->
+          <el-cascader
+            :options="options"
+            :props="defaultProps"
+            clearable
             v-model="addCatForm.cat_pid_arr"
-            placeholder="请选择活动区域"
-          >
-            <el-option label="区域一" value="shanghai"></el-option>
-            <el-option label="区域二" value="beijing"></el-option>
-          </el-select>
+          ></el-cascader>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -65,7 +65,29 @@ export default {
           cat_level: "一级"
         }
       ],
-      dialogAddCatFormVisible: false,
+      /**
+       * children :结构
+       * label：显示
+       * value：收集数据
+       */
+      options: [
+        {
+          value: "zhinan",
+          label: "指南",
+          children: [
+            {
+              value: "shejiyuanze",
+              label: "设计原则"
+            }
+          ]
+        }
+      ],
+      // 级联选择器的 配置对象
+      defaultProps:{
+        value:'cat_id',
+        label:'cat_name'
+      },
+      dialogAddCatFormVisible: true,
       addCatForm: {
         cat_name: "",
         cat_pid_arr: []
@@ -74,6 +96,7 @@ export default {
   },
   created() {
     this.loadCatData();
+    this.loadCatData2();
   },
   methods: {
     async loadCatData() {
@@ -84,8 +107,17 @@ export default {
           pagesize: 4
         }
       });
-      console.log(res);
+      // console.log(res);
       this.catData = res.data.data.result;
+    },
+    async loadCatData2() {
+      let res = await this.$axios.get("categories", {
+        params: {
+          type: 2
+        }
+      });
+      console.log(res);
+      this.options = res.data.data;
     },
     addCat() {
       this.dialogAddCatFormVisible = true;

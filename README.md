@@ -327,10 +327,9 @@ name :'浦东新区'
 > 下=> 上
 
 1.  点击页码
-    this.$router.push('/users/'+curPage)
+    this.\$router.push('/users/'+curPage)
 
 >
-
 
 # 商品分类 => 树结构
 
@@ -340,12 +339,12 @@ name :'浦东新区'
 - 引入
 
 ```js
-import ElTreeGrid from 'element-tree-grid'
-Vue.component(ElTreeGrid.name, ElTreeGrid)
+import ElTreeGrid from "element-tree-grid";
+Vue.component(ElTreeGrid.name, ElTreeGrid);
 ```
 
 - 拷贝列 + 合并列
-el-table-tree-column
+  el-table-tree-column
 
 - 几个属性
 - treeKey => 父节点 找子节点 tree-key='cat_id'
@@ -354,3 +353,23 @@ el-table-tree-column
 - levelKey => 按照登记进行缩进 level-key='cat_level'
 - indentSize => 缩进:indent-size='20'
 
+# 添加商品分类
+
+1. 弹出对话框
+2. 显示父级名称列表
+   > 2.1 先准备级联选择器组件 + options 数据拷贝过来
+   > 2.2 获取二层的分类数据 type:2
+   > 2.3 把数据赋值给 options
+   > this.options = res.data.data
+   > 2.4 只有结构，没有显示标题，对不上号
+
+- :props='defaultProps'
+- defaultProps:{
+  value:'cat_id',
+  label:'cat_name'
+  }
+
+> 2.5 addCatForm =>{
+    cat_name,
+    cat_pid_arr
+}
