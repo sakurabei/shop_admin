@@ -330,3 +330,27 @@ name :'浦东新区'
     this.$router.push('/users/'+curPage)
 
 >
+
+
+# 商品分类 => 树结构
+
+> 参考：https://github.com/foolishchow/element-tree-grid
+
+- 安装 ： npm install element-tree-grid --save
+- 引入
+
+```js
+import ElTreeGrid from 'element-tree-grid'
+Vue.component(ElTreeGrid.name, ElTreeGrid)
+```
+
+- 拷贝列 + 合并列
+el-table-tree-column
+
+- 几个属性
+- treeKey => 父节点 找子节点 tree-key='cat_id'
+- parentKey => 子节点找父节点 parent-key = "cat_pid"
+
+- levelKey => 按照登记进行缩进 level-key='cat_level'
+- indentSize => 缩进:indent-size='20'
+

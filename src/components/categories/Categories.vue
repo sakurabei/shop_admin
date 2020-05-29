@@ -2,7 +2,7 @@
 <template>
   <div>
     <el-table :data="catData" style="width: 100%">
-      <el-table-column prop="cat_name" label="分类名称" width="180"></el-table-column>
+      <el-table-tree-column prop="cat_name" label="分类名称" width="220" tree-key="cat_id" parent-key="cat_pid" level-key="cat_level" :index-size='20'></el-table-tree-column>
       <el-table-column label="是否有效" width="180">
         <template slot-scope="scope">{{scope.row.cat_deleted?'否':'是'}}</template>
       </el-table-column>
@@ -19,6 +19,9 @@
 
 <script>
 /* eslint-disable */
+import Vue from 'vue'
+import ElTreeGrid from 'element-tree-grid'
+Vue.component(ElTreeGrid.name,ElTreeGrid)
 export default {
   data() {
     return {
