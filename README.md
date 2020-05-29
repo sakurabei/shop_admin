@@ -370,6 +370,15 @@ Vue.component(ElTreeGrid.name, ElTreeGrid);
   }
 
 > 2.5 addCatForm =>{
+
     cat_name,
     cat_pid_arr
+
 }
+
+3. 发送请求
+   > const { cat_name,cat_pid_arr}= this.addCatForm
+   > 请求的三个参数
+   > cat_name 直接用
+   > cat_pid: 数组的最后一个元素（父 id）
+   > at_level 数组的长度

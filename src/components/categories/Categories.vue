@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-button type="success" plain @click="addCat">添加分类</el-button>
+    <el-button type="success" plain @click="showAddCatDialog"
+      >添加分类</el-button
+    >
     <el-table :data="catData" style="width: 100%">
       <el-table-tree-column
         prop="cat_name"
@@ -42,9 +44,7 @@
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogAddCatFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogAddCatFormVisible = false"
-          >确 定</el-button
-        >
+        <el-button type="primary" @click="addCat">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -83,11 +83,11 @@ export default {
         }
       ],
       // 级联选择器的 配置对象
-      defaultProps:{
-        value:'cat_id',
-        label:'cat_name'
+      defaultProps: {
+        value: "cat_id",
+        label: "cat_name"
       },
-      dialogAddCatFormVisible: true,
+      dialogAddCatFormVisible: false,
       addCatForm: {
         cat_name: "",
         cat_pid_arr: []
@@ -110,6 +110,7 @@ export default {
       // console.log(res);
       this.catData = res.data.data.result;
     },
+    // 添加分类处，使用
     async loadCatData2() {
       let res = await this.$axios.get("categories", {
         params: {
@@ -119,8 +120,33 @@ export default {
       console.log(res);
       this.options = res.data.data;
     },
-    addCat() {
+    // 弹出对话框
+    showAddCatDialog() {
       this.dialogAddCatFormVisible = true;
+    },
+    // 添加分类
+    async addCat() {
+      // 1.获取已知信息
+      const { cat_name, cat_pid_arr } = this.addCatForm;
+      // 发送请求
+      let res = await this.$axios.post("categories", {
+        cat_pid: cat_pid_arr[cat_pid_arr.length - 1], //父id数组
+        cat_name,
+        cat_level: cat_pid_arr.length //数组的长度
+      });
+      console.log(res);
+      if (res.data.meta.status == 201) {
+        // 1. 关闭对话框
+        this.dialogAddCatFormVisible = false;
+        // 2.提示
+        this.$message({
+          message: "添加分类成功",
+          type: "success",
+          duration: 800
+        });
+        // 3. 刷新
+        this.loadCatData();
+      }
     }
   }
 };
