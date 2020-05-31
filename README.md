@@ -417,5 +417,8 @@ Vue.component(ElTreeGrid.name, ElTreeGrid);
 - next(index,name){
   this.activeIndex = index
   this.activeName = name
-
 }
+
+5. 四个文本输入框+级联选择器
+> 展示 + 获取数据 + 配置项（value，label）
+

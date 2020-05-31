@@ -6,15 +6,32 @@
     <el-step title="第三步" description="商品内容"></el-step>
   </el-steps>
   <!-- 标签页 -->
-  <el-tabs
-    @tab-click="clickTabs"
-    v-model="activeName"
-    tab-position="left"
-    style="height: 200px;"
-  >
+  <el-tabs @tab-click="clickTabs" v-model="activeName" tab-position="left">
     <!-- 第一步 -->
     <el-tab-pane name="one" label="基本信息"
-      >基本信息
+      ><el-form :model="addGoodsForm" label-width="80px">
+        <el-form-item label="商品名称">
+          <el-input v-model="addGoodsForm.goods_name"></el-input>
+        </el-form-item>
+        <el-form-item label="商品价格">
+          <el-input v-model="addGoodsForm.goods_price"></el-input>
+        </el-form-item>
+        <el-form-item label="商品重量">
+          <el-input v-model="addGoodsForm.goods_weight"></el-input>
+        </el-form-item>
+        <el-form-item label="商品数量">
+          <el-input v-model="addGoodsForm.goods_number"></el-input>
+        </el-form-item>
+        <el-form-item label="商品分类">
+          <!-- <el-input v-model="addGoodsForm.goods_number"></el-input> -->
+          <el-cascader
+            v-model="addGoodsForm.goods_cat"
+            :props="defaultProps"
+            :options="options"
+            clearable
+          ></el-cascader>
+        </el-form-item>
+      </el-form>
       <el-button @click="next(2,'two')" type="primary">下一步</el-button>
     </el-tab-pane>
     <!-- 第二步 -->
