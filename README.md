@@ -417,8 +417,14 @@ Vue.component(ElTreeGrid.name, ElTreeGrid);
 - next(index,name){
   this.activeIndex = index
   this.activeName = name
-}
+  }
 
 5. 四个文本输入框+级联选择器
-> 展示 + 获取数据 + 配置项（value，label）
+   > 展示 + 获取数据 + 配置项（value，label）
 
+> 单选框
+
+ <!-- label 是收集数据 -->
+
+    <el-radio v-model="addGoodsForm.radio" :label="true">是</el-radio>
+    <el-radio v-model="addGoodsForm.radio" :label="false">否</el-radio>

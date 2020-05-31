@@ -31,6 +31,13 @@
             clearable
           ></el-cascader>
         </el-form-item>
+        <el-form-item label="是否促销">
+          <!-- label 是收集数据 -->
+          <!-- :label 可以查数据 -->
+          <!-- <el-input v-model="addGoodsForm.goods_number"></el-input> -->
+          <el-radio v-model="addGoodsForm.radio" :label="true">是</el-radio>
+          <el-radio v-model="addGoodsForm.radio" :label="false">否</el-radio>
+        </el-form-item>
       </el-form>
       <el-button @click="next(2,'two')" type="primary">下一步</el-button>
     </el-tab-pane>

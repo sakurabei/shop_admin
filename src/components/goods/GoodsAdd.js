@@ -13,7 +13,8 @@ export default {
         goods_weight: "",
         goods_cat: [],
         goods_introduce: "",
-        pics: []
+        pics: [],
+        radio: true
       },
       options: [
         {
