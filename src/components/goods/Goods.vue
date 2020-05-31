@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-button type="success" @click="go2GoodsAdd">添加商品</el-button>
     <el-table :data="goodsData" style="width: 100%">
       <el-table-column type="index"> </el-table-column>
       <el-table-column prop="goods_name" label="商品名称" width="180">
@@ -48,6 +49,11 @@ export default {
       });
       console.log(res);
       this.goodsData = res.data.data.goods;
+    },
+    // 跳转到添加商品页面
+    go2GoodsAdd(){
+      this.$router.push('/goods-add')
+
     }
   },
   filters: {
