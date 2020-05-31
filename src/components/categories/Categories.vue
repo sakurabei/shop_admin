@@ -107,7 +107,7 @@ export default {
           pagesize: 4
         }
       });
-      // console.log(res);
+      console.log(res);
       this.catData = res.data.data.result;
     },
     // 添加分类处，使用
@@ -117,7 +117,7 @@ export default {
           type: 2
         }
       });
-      console.log(res);
+      // console.log(res);
       this.options = res.data.data;
     },
     // 弹出对话框

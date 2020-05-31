@@ -382,3 +382,9 @@ Vue.component(ElTreeGrid.name, ElTreeGrid);
    > cat_name 直接用
    > cat_pid: 数组的最后一个元素（父 id）
    > at_level 数组的长度
+
+# 商品列表
+
+> 1. 创建商品组件
+> 2. 四个步骤
+
