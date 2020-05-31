@@ -400,3 +400,11 @@ Vue.component(ElTreeGrid.name, ElTreeGrid);
 - 每个 tab 元素加 name
 - tabs => v-model = 'activeName'
 - 控制 activeName 就可以控制 tabs 的切换
+
+3. 让标签页和步骤条关联起来
+   > 点击标签页 => 控制步骤条
+   > 3.1 tabs 注册一个时间 <el-tabs @tab-click ="clickTab">
+   > 3.2 clickTab(tab){
+   > // tab.index 0=> 开始
+   > this.activeIndex = +tab.index +1
+   > }
