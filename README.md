@@ -388,3 +388,15 @@ Vue.component(ElTreeGrid.name, ElTreeGrid);
 > 1. 创建商品组件
 > 2. 四个步骤
 
+# 添加商品
+
+1. 步骤条
+
+- :index ='activeIndex'
+- activeIndex :?
+
+2. 标签页
+
+- 每个 tab 元素加 name
+- tabs => v-model = 'activeName'
+- 控制 activeName 就可以控制 tabs 的切换
