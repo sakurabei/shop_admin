@@ -476,3 +476,38 @@ Vue.use(VueQuillEditor /* { default global options } */);
 >
 </quill-editor>
 ```
+
+# scoped
+
+> scoped
+
+- 作用：添加 scoped 之后，当前组件内的样式只对当前组件起效果
+  > 不良反应 ： HTML ，body => 不起效果的
+  > 不良反应： 动态添加的不起效果的
+  > innerHtml => v-html
+
+> 解决办法：
+
+- 方式一：在 less 里面添加一个 style 标签
+
+```js
+<style>
+
+.ql-container {
+  height: 400px;
+  background: pink;
+}
+
+.red {
+  color: red;
+}
+</style>
+
+```
+
+- 方式 2: 穿透/deep/
+
+  > 父元素/deep/子元素
+
+- 方式 3：穿透 >>> (不支持 less)
+  格式 : 父元素>>> 子元素
