@@ -98,6 +98,38 @@ export default {
       this.addGoodsForm.pics.push({
         pic: res.data.tmp_path
       });
+    },
+    // 添加商品
+    async addGoods() {
+      // 1.获取数据
+      const {
+        goods_name,
+        goods_price,
+        goods_number,
+        goods_weight,
+        goods_cat,
+        goods_introduce,
+        pics
+      } = this.addGoodsForm;
+
+      let res = await this.$axios.post("goods", {
+        goods_name,
+        goods_price,
+        goods_number,
+        goods_weight,
+        goods_cat: goods_cat.join(","),
+        goods_introduce,
+        pics
+      });
+      console.log(res);
+      if (res.data.meta.status === 201) {
+        this.$message({
+          message: "添加商品成功",
+          type: "success",
+          duration: 800
+        });
+        this.$router.push("/goods");
+      }
     }
   }
 };
