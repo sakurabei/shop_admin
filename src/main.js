@@ -7,6 +7,12 @@ import router from './router/router.js'
 // 引入 element-ui
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
+// 引入富文本编辑器
+import VueQuillEditor from 'vue-quill-editor'
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+
 // 引入自定义的全局公共css
 import './assets/css/common.css'
 // 处理axios的三个问题
@@ -24,6 +30,7 @@ axios.interceptors.request.use(function (config) {
 }, function (error) {
   return Promise.reject(error)
 })
+
 // 响应拦截器里
 // axios.interceptors.response.use(
 //   function (response) {
@@ -47,6 +54,7 @@ axios.interceptors.request.use(function (config) {
 // )
 Vue.use(ElementUI)
 Vue.config.productionTip = false
+Vue.use(VueQuillEditor /* { default global options } */)
 
 /* eslint-disable no-new */
 new Vue({

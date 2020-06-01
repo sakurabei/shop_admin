@@ -446,3 +446,33 @@ this.addGoodsForm.pics.push({
   pic: res.data.tmp_path
 });
 ```
+
+# 富文本编辑器
+
+> 参考 https://github.com/surmon-china/vue-quill-editor
+
+- 安装 :`npm install vue-quill-editor --save`
+- 引入 main.js
+
+```js
+// 引入富文本编辑器
+import VueQuillEditor from "vue-quill-editor";
+import "quill/dist/quill.core.css";
+import "quill/dist/quill.snow.css";
+import "quill/dist/quill.bubble.css";
+Vue.use(VueQuillEditor /* { default global options } */);
+```
+
+- 使用 => SPA => 双向按数据绑定
+
+```html
+<quill-editor
+  v-model="content"
+  ref="myQuillEditor"
+  :options="editorOption"
+  @blur="onEditorBlur($event)"
+  @focus="onEditorFocus($event)"
+  @ready="onEditorReady($event)"
+>
+</quill-editor>
+```

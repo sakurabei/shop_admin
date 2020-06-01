@@ -57,6 +57,9 @@ export default {
       // 上传图片的请求头
       headers: {
         Authorization: localStorage.getItem("token")
+      },
+      editorOption: {
+        placeholder: "请输入您的密码给我"
       }
     };
   },

@@ -59,8 +59,15 @@
       <el-button @click="next(3,'three')" type="primary">下一步</el-button>
     </el-tab-pane>
     <!-- 第三步 -->
-    <el-tab-pane name="three" label="商品内容"
-      >商品内容
+    <el-tab-pane name="three" label="商品内容">
+      <!-- 富文本编辑器-->
+      <quill-editor
+        v-model="addGoodsForm.goods_introduce"
+        :options="editorOption"
+      />
+      <!-- @blur="onEditorBlur($event)"
+        @focus="onEditorFocus($event)"
+        @ready="onEditorReady($event)" -->
       <el-button type="primary">确定</el-button>
     </el-tab-pane>
   </el-tabs>
