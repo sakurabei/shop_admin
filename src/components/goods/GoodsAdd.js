@@ -50,6 +50,13 @@ export default {
       defaultProps: {
         value: "cat_id",
         label: "cat_name"
+      },
+      // 上传图片部分
+      dialogImageUrl: "",
+      dialogVisible: false,
+      // 上传图片的请求头
+      headers: {
+        Authorization: localStorage.getItem("token")
       }
     };
   },
@@ -74,6 +81,20 @@ export default {
       let res = await this.$axios.get("categories");
       // console.log(res);
       this.options = res.data.data;
+    },
+    // 上传图片部分
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePictureCardPreview(file) {
+      this.dialogImageUrl = file.url;
+      this.dialogVisible = true;
+    },
+    // 上传图片
+    uploadImgSuccess(res) {
+      this.addGoodsForm.pics.push({
+        pic: res.data.tmp_path
+      });
     }
   }
 };

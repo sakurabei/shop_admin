@@ -428,3 +428,21 @@ Vue.component(ElTreeGrid.name, ElTreeGrid);
 
     <el-radio v-model="addGoodsForm.radio" :label="true">是</el-radio>
     <el-radio v-model="addGoodsForm.radio" :label="false">否</el-radio>
+
+# 商品图片
+
+1. 拷贝 => el-upload
+2. 处理 actions ='基准路径 + upload'
+3. 处理 请求头:headers='headers'
+4. 上传成功回调 :on-success = 'uploadImgSuccess'
+   uploadImgSuccess(res){
+
+}
+
+5. 添加到数组里
+
+```js
+this.addGoodsForm.pics.push({
+  pic: res.data.tmp_path
+});
+```
